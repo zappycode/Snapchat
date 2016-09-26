@@ -28,7 +28,7 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
         nextButton.isEnabled = false
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         imageView.image = image
@@ -42,7 +42,7 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBAction func cameraTapped(_ sender: AnyObject) {
         
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = false
         
         present(imagePicker, animated: true, completion: nil)
@@ -73,7 +73,7 @@ class PictureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let nextVC = segue.destination as! SelectUserViewController
         nextVC.imageURL = sender as! String

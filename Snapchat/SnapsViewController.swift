@@ -25,11 +25,14 @@ class SnapsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print(snapshot)
             
             let snap = Snap()
-            snap.imageURL = snapshot.value!["imageURL"] as! String
-            snap.from = snapshot.value!["from"] as! String
-            snap.descrip = snapshot.value!["description"] as! String
+            
+            let theValue = snapshot.value as! NSDictionary
+            
+            snap.imageURL = theValue["imageURL"] as! String
+            snap.from = theValue["from"] as! String
+            snap.descrip = theValue["description"] as! String
             snap.key = snapshot.key
-            snap.uuid = snapshot.value!["uuid"] as! String
+            snap.uuid = theValue["uuid"] as! String
             
             self.snaps.append(snap)
             
@@ -82,7 +85,7 @@ class SnapsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         performSegue(withIdentifier: "viewsnapsegue", sender: snap)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "viewsnapsegue" {
             let nextVC = segue.destination as! ViewSnapViewController

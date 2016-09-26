@@ -27,9 +27,10 @@ class SelectUserViewController: UIViewController, UITableViewDataSource, UITable
         
         FIRDatabase.database().reference().child("users").observe(FIRDataEventType.childAdded, with: {(snapshot) in
             print(snapshot)
+            print(snapshot.value)
             
             let user = User()
-            user.email = snapshot.value!["email"] as! String
+            user.email = (snapshot.value as! NSDictionary)["email"] as! String
             user.uid = snapshot.key
             
             self.users.append(user)
